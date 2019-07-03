@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -16,22 +17,22 @@ class App extends Component {
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
-    });
+  });
 
     // const person = Object.assign({}, this.state.person[personIndex]);
 
-    const person = {
-      ...this.state.persons[personIndex]
-    };
+  const person = {
+    ...this.state.persons[personIndex]
+  };
 
-    person.name = event.target.value;
+  person.name = event.target.value;
 
-    const persons = [...this.state.persons];
-    persons[personIndex] = person;
+  const persons = [...this.state.persons];
+  persons[personIndex] = person;
 
 
-    this.setState({ persons: persons});
-    }
+  this.setState({ persons: persons});
+  }
 
   deletePersonHandler = (personIndex) => {
     // const persons = this.state.persons.slice();
@@ -51,7 +52,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -71,6 +76,10 @@ class App extends Component {
         );
 
         style.backgroundColor = 'red';
+        style[':hover'] = {
+          backgroundColor: 'salmon',
+          color: 'black'
+        }
       }
 
       let classes = [];
@@ -96,4 +105,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
